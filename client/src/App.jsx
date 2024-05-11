@@ -1,26 +1,27 @@
-import axios from 'axios'
-import './App.css'
-import { useEffect, useState } from 'react'
-
-const dataTobeSent = {
-  name: 'Fame',
-}
-
+import "./App.css";
+import { Routes, Route } from "react-router";
+import Signins from "./components/Authentication/signins.component";
+import Landing from "./components/HomePage/homepage.component";
+import Auth from "./components/Authentication/auth.component";
+import { UserProvider } from "./contexts/user.context";
 function App() {
-  const [count, setcount] = useState(false)
-  useEffect(() => {
-    if (count){
-      axios.post('http://localhost:8080/postdata', dataTobeSent).then(response => console.log(response)).catch(error => console.log(error))
-      console.log('works')
-    }
-  }, [count])
   return (
     <>
-      <div>
-          <button onClick={() => setcount(true)}>Click</button>
-      </div>
+      <UserProvider>
+        <div className="App">
+          <Routes>
+            <Route path="/">
+              <Route index element={<Landing />}></Route>
+              <Route path="auth">
+                <Route index element={<Auth />}></Route>
+                <Route path="signin" element={<Signins />}></Route>
+              </Route>
+            </Route>
+          </Routes>
+        </div>
+      </UserProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

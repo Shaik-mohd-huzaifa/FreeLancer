@@ -1,0 +1,28 @@
+# Python-specific ignores
+*.pyc
+__pycache__/
+instance/
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables
+.env
+
+# Compiled Python files
+*.pyc
+
+# React-specific ignores
+node_modules/
+build/
+npm-debug.log
+yarn-error.log
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
+Thumbs.db

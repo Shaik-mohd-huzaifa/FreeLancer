@@ -1,10 +1,10 @@
 import { UserContext } from "../../contexts/user.context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 const Landing = () => {
   const { user } = useContext(UserContext);
   return (
     <div className="">
-      <p>{user.name || "None"}</p>
+      <p>{user.name || "Guest"}</p>
     </div>
   );
 };

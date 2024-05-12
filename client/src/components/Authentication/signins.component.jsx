@@ -3,7 +3,7 @@ import { UserContext } from "../../contexts/user.context";
 import { useContext } from "react";
 
 const Signins = () => {
-  const { updateUser } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,9 +18,9 @@ const Signins = () => {
         email,
         password,
       });
-      updateUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      updateUser({ name: response.data.status });
       console.log(response.data);
-
       // Handle success
     } catch (error) {
       console.error(error);

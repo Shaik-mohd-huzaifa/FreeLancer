@@ -1,28 +1,34 @@
-import { createContext, useState } from "react";
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
 // Create the user context
 export const UserContext = createContext({
   user: null,
-  updateUser: () => {},
+  updateUser: () => null,
 });
 
 // Create the user context provider component
 // eslint-disable-next-line react/prop-types
 export const UserProvider = ({ children }) => {
   // State to store the user data
-  const [user, setUser] = useState({});
+  const [user, updateUser] = useState({ name: "Guest" });
 
-  // Function to update the user data
-  const updateUser = (userData) => {
-    setUser(userData);
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/currentUser")
+      .then((response) => {
+        updateUser(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
-  // Value object to be provided by the context
   const value = {
     user,
     updateUser,
   };
 
-  // Render the context provider with the provided value
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

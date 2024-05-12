@@ -2,7 +2,7 @@
 *.pyc
 __pycache__/
 instance/
-
+config.py
 # Virtual environment
 venv/
 env/

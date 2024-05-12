@@ -3,23 +3,22 @@ import { Routes, Route } from "react-router";
 import Signins from "./components/Authentication/signins.component";
 import Landing from "./components/HomePage/homepage.component";
 import Auth from "./components/Authentication/auth.component";
-import { UserProvider } from "./contexts/user.context";
+import SelectionComponent from "./components/selection/selection.component";
+
 function App() {
   return (
     <>
-      <UserProvider>
-        <div className="App">
-          <Routes>
-            <Route path="/">
-              <Route index element={<Landing />}></Route>
-              <Route path="auth">
-                <Route index element={<Auth />}></Route>
-                <Route path="signin" element={<Signins />}></Route>
-              </Route>
+      <div className="App">
+        <Routes>
+          <Route path="/">
+            <Route index element={<SelectionComponent />}></Route>
+            <Route path="auth">
+              <Route index element={<Auth />}></Route>
+              <Route path="signin" element={<Signins />}></Route>
             </Route>
-          </Routes>
-        </div>
-      </UserProvider>
+          </Route>
+        </Routes>
+      </div>
     </>
   );
 }

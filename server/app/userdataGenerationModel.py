@@ -1,6 +1,7 @@
 from config import gemini_api_key
 import google.generativeai as genai
 
+
 genai.configure(api_key=gemini_api_key)
 
 # Set up the model
@@ -45,4 +46,19 @@ def extract_pdf_pages(pathname: str) -> list[str]:
     return parts
 
 
-convo = model.start_chat(history=[])
+userDataGeneration = model.start_chat(
+    history=[
+        {
+            "role": "user",
+            "parts": [
+                'Matthew Rodriguez,matthew.rodriguez.dev@email.com,"Full-Stack Development (Python, Django, JavaScript, React), API Development, Database Management",3+ years experience building web applications from scratch, handling both frontend and backend development. Strong understanding of databases and API integration.,$50/hour'
+            ],
+        },
+        {
+            "role": "model",
+            "parts": [
+                '```json\n{\n  "name": "Matthew Rodriguez",\n  "email": "matthew.rodriguez.dev@email.com",\n  "experience": "3+ years",\n  "hourlyRate": "$50/hour",\n  "skills": [\n    "Frontend Development",\n    "JavaScript",\n    "React",\n    "Backend Development",\n    "Python",\n    "Django",\n    "API Development",\n    "Database Management",\n    "Full Stack Development"\n  ],\n  "skillLevels": {\n    "Frontend Development": "70%",\n    "Backend Development": "70%",\n    "Full Stack Development": "80%"\n  }\n}\n```'
+            ],
+        },
+    ]
+)
